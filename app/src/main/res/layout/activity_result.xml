@@ -4,13 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context="com.android.quizzapp.ResultActivity">
 
     <TextView
         android:id="@+id/result"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fontFamily="casual"
         android:gravity="center"
-        android:text="Result Will Be Shown Here"/>
+        android:text="Result Will Be Shown Here"
+        android:textColor="@android:color/background_light"
+        android:textSize="@dimen/results" />
 
 </LinearLayout>

@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
     public static int correct;
     public static int wrong;
     RadioGroup radio_Q1, radio_Q2, radio_Q3, radio_Q4, radio_Q5, radio_Q6, radio_Q7, radio_Q8, radio_Q9, radio_Q10;
-    Button submitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         radio_Q8 = (RadioGroup) findViewById(R.id.question_eight);
         radio_Q9 = (RadioGroup) findViewById(R.id.question_nine);
         radio_Q10 = (RadioGroup) findViewById(R.id.question_ten);
-        submitButton = (Button) findViewById(R.id.submit_button);
 
     }
 
