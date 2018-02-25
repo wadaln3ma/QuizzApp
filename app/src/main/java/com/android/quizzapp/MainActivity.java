@@ -1,10 +1,12 @@
 package com.android.quizzapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -13,7 +15,8 @@ public class MainActivity extends AppCompatActivity {
     public static int total;
     public static int correct;
     public static int wrong;
-    RadioGroup radio_Q1, radio_Q2, radio_Q3, radio_Q4, radio_Q5, radio_Q6, radio_Q7, radio_Q8, radio_Q9, radio_Q10;
+    IResult iResult = new Results();
+    public RadioGroup radio_Q1, radio_Q2, radio_Q3, radio_Q4, radio_Q5, radio_Q6, radio_Q7, radio_Q8, radio_Q9, radio_Q10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void startQuiz() {
+
+        void startQuiz() {
         Questions q1 = new Questions(getString(R.string.question1), getString(R.string.q1op1), getString(R.string.q1op2), getString(R.string.q1op3), getString(R.string.q1op4), new Answer(getString(R.string.q1op2)));
         Questions q2 = new Questions(getString(R.string.question2), getString(R.string.q2op1), getString(R.string.q2op2), getString(R.string.q2op3), getString(R.string.q2op4), new Answer(getString(R.string.q2op2)));
         Questions q3 = new Questions(getString(R.string.question3), getString(R.string.q3op1), getString(R.string.q3op2), getString(R.string.q3op3), getString(R.string.q3op4), new Answer(getString(R.string.q3op3)));
@@ -75,13 +79,31 @@ public class MainActivity extends AppCompatActivity {
             i++;
         }
 
-
     }
-
 
     public void showResults(View view) {
-        startQuiz();
-        Intent intent = new Intent(MainActivity.this, ResultActivity.class);
-        startActivity(intent);
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(this);
+        }
+        builder.setTitle("Submit Answers")
+                .setMessage("Are you sure you want to submit these answers?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        startQuiz();
+                        Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert).show();
+
     }
+
 }

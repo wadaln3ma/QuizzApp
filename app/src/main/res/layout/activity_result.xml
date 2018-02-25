@@ -14,7 +14,7 @@
         android:fontFamily="casual"
         android:gravity="center"
         android:text="Result Will Be Shown Here"
-        android:textColor="@android:color/background_light"
+        android:textColor="@android:color/holo_red_dark"
         android:textSize="@dimen/results" />
 
 </LinearLayout>

@@ -1,7 +1,7 @@
 package com.android.quizzapp;
 
 
-public class Results {
+public class Results implements IResult {
     public String message;
 
     public void showResult(int correct, int wrong, int total) {
@@ -51,4 +51,7 @@ public class Results {
         }
     }
 
+    public  String getMessage() {
+        return message;
+    }
 }
