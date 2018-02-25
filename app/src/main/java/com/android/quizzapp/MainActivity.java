@@ -62,14 +62,9 @@ public class MainActivity extends AppCompatActivity {
             counter++;
         }
 
-        for (String st : answers) {
-            String k = st;
-            System.out.println(k);
-        }
         int i = 0;
         for (Questions q : questionsArr) {
             String ans = q.getAnswer1().getAnswer();
-            String ansss = answers[i];
             if (ans.equals(answers[i])) {
                 correct++;
             } else {
