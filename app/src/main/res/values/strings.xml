@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Quizz App</string>
     <string name="greetings">Java Quiz</string>
-    <string name="scroll">Scroll Down To Begin..</string>
+    <string name="startQuiz">Click Here to Start</string>
     <!-- ============================ -->
     <!-- Question One and its options -->
     <!-- ============================ -->
