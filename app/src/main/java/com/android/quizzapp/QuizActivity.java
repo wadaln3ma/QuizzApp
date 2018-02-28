@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class QuizActivity extends AppCompatActivity {
     public int total, wrong, correct, counter = 0;
@@ -139,6 +140,23 @@ public class QuizActivity extends AppCompatActivity {
                     }
                 })
                 .setIcon(android.R.drawable.ic_dialog_info).show();
+    }
+
+    private int backButtonCount = 0;
+    @Override
+    public void onBackPressed(){
+        if(backButtonCount >= 1)
+        {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        else
+        {
+            Toast.makeText(this, "Press the back button once again to close the application.", Toast.LENGTH_SHORT).show();
+            backButtonCount++;
+        }
     }
 
 
