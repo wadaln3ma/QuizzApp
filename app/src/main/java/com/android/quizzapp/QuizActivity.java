@@ -4,59 +4,63 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 public class QuizActivity extends AppCompatActivity {
-    public int total;
-    public int correct;
-    public int wrong;
-    Button submitButton;
-    public RadioGroup radio_Q1, radio_Q2, radio_Q3, radio_Q4, radio_Q5, radio_Q6, radio_Q7, radio_Q8, radio_Q9, radio_Q10;
-    IResult iResult = new Results();
+    public int total, wrong, correct, counter = 0;
+    public RadioGroup radio_Q1, radio_Q3, radio_Q4, radio_Q5, radio_Q7, radio_Q8, radio_Q9;
+    CheckBox checkBoxOne, checkBoxTwo, checkBoxThree, checkBoxFour, checkBoxFive, checkBoxSix;
+    EditText editText;
+    boolean checkOptionOne, checkOptionTwo, checkOptionThree, checkOptionFour, checkOptionFive, checkOptionSix;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        checkBoxOne = (CheckBox) findViewById(R.id.q2op1);
+        checkBoxTwo = (CheckBox) findViewById(R.id.q2op2);
+        checkBoxThree = (CheckBox) findViewById(R.id.q2op3);
+        checkBoxFour = (CheckBox) findViewById(R.id.q2op4);
+        checkBoxFive = (CheckBox) findViewById(R.id.q6op1);
+        checkBoxSix = (CheckBox) findViewById(R.id.q6op2);
         radio_Q1 = (RadioGroup) findViewById(R.id.question_one);
-        radio_Q2 = (RadioGroup) findViewById(R.id.question_two);
         radio_Q3 = (RadioGroup) findViewById(R.id.question_three);
         radio_Q4 = (RadioGroup) findViewById(R.id.question_four);
         radio_Q5 = (RadioGroup) findViewById(R.id.question_five);
-        radio_Q6 = (RadioGroup) findViewById(R.id.question_six);
         radio_Q7 = (RadioGroup) findViewById(R.id.question_seven);
         radio_Q8 = (RadioGroup) findViewById(R.id.question_eight);
         radio_Q9 = (RadioGroup) findViewById(R.id.question_nine);
-        radio_Q10 = (RadioGroup) findViewById(R.id.question_ten);
+        editText = (EditText) findViewById(R.id.question_ten_edit);
 
-        submitButton = (Button) findViewById(R.id.submit_button);
-
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            correct = extras.getInt("correct");
+            wrong = extras.getInt("wrong");
+            total = extras.getInt("total");
+        }
     }
 
-    void startQuizz() {
+    void startQuiz() {
         Questions q1 = new Questions(getString(R.string.question1), getString(R.string.q1op1), getString(R.string.q1op2), getString(R.string.q1op3), getString(R.string.q1op4), new Answer(getString(R.string.q1op2)));
-        Questions q2 = new Questions(getString(R.string.question2), getString(R.string.q2op1), getString(R.string.q2op2), getString(R.string.q2op3), getString(R.string.q2op4), new Answer(getString(R.string.q2op2)));
         Questions q3 = new Questions(getString(R.string.question3), getString(R.string.q3op1), getString(R.string.q3op2), getString(R.string.q3op3), getString(R.string.q3op4), new Answer(getString(R.string.q3op3)));
         Questions q4 = new Questions(getString(R.string.question4), getString(R.string.q4op1), getString(R.string.q4op2), getString(R.string.q4op3), getString(R.string.q4op4), new Answer(getString(R.string.q4op4)));
         Questions q5 = new Questions(getString(R.string.question5), getString(R.string.q5op1), getString(R.string.q5op2), getString(R.string.q5op3), getString(R.string.q5op4), new Answer(getString(R.string.q5op2)));
-        Questions q6 = new Questions(getString(R.string.question6), getString(R.string.q6op1), getString(R.string.q6op2), getString(R.string.q6op3), getString(R.string.q6op4), new Answer(getString(R.string.q6op3)));
         Questions q7 = new Questions(getString(R.string.question7), getString(R.string.q7op1), getString(R.string.q7op2), getString(R.string.q7op3), getString(R.string.q7op4), new Answer(getString(R.string.q7op1)));
         Questions q8 = new Questions(getString(R.string.question8), getString(R.string.q8op1), getString(R.string.q8op2), getString(R.string.q8op3), getString(R.string.q8op4), new Answer(getString(R.string.q8op4)));
         Questions q9 = new Questions(getString(R.string.question9), getString(R.string.q9op1), getString(R.string.q9op2), getString(R.string.q9op3), getString(R.string.q9op4), new Answer(getString(R.string.q9op2)));
-        Questions q10 = new Questions(getString(R.string.question10), getString(R.string.q1op1), getString(R.string.q10op2), getString(R.string.q10op3), getString(R.string.q10op4), new Answer(getString(R.string.q10op4)));
 
-        Questions[] questionsArr = {q1, q2, q3, q4, q5, q6, q7, q8, q9, q10};
+        Questions[] questionsArr = {q1, q3, q4, q5, q7, q8, q9};
 
-        RadioGroup radioGroup[] = {radio_Q1, radio_Q2, radio_Q3, radio_Q4, radio_Q5, radio_Q6, radio_Q7, radio_Q8, radio_Q9, radio_Q10};
+        RadioGroup radioGroup[] = {radio_Q1, radio_Q3, radio_Q4, radio_Q5, radio_Q7, radio_Q8, radio_Q9};
 
-        String answers[] = new String[10];
-        int counter = 0;
+        String answers[] = new String[7];
         for (RadioGroup r : radioGroup) {
             int selectedId = r.getCheckedRadioButtonId();
             RadioButton selectedRadioButton = (RadioButton) findViewById(selectedId);
@@ -64,18 +68,51 @@ public class QuizActivity extends AppCompatActivity {
             counter++;
         }
 
-        int i = 0;
+        counter = 0;
         for (Questions q : questionsArr) {
             String ans = q.getAnswer1().getAnswer();
-            if (ans.equals(answers[i])) {
+            if (ans.equals(answers[counter])) {
                 correct++;
             } else {
                 wrong++;
             }
             total++;
-            i++;
+            counter++;
         }
+
+        checkOptionOne = checkBoxOne.isChecked();
+        checkOptionTwo = checkBoxTwo.isChecked();
+        checkOptionThree = checkBoxThree.isChecked();
+        checkOptionFour = checkBoxFour.isChecked();
+
+        if (!checkOptionOne && checkOptionTwo && !checkOptionThree && checkOptionFour) {
+            correct++;
+        } else {
+            wrong++;
+        }
+        total++;
+
+        checkOptionFive = checkBoxFive.isChecked();
+        checkOptionSix = checkBoxSix.isChecked();
+
+        if (!checkOptionFive && checkOptionSix) {
+            correct++;
+        } else {
+            wrong++;
+        }
+        total++;
+
+        String questionTenAnswer = editText.getText().toString();
+
+        if (questionTenAnswer.equals(getString(R.string.question_ten_answer))) {
+            correct++;
+        } else {
+            wrong++;
+        }
+        total++;
+
     }
+
 
     public void submitAnswers(View view) {
         AlertDialog.Builder builder;
@@ -88,11 +125,11 @@ public class QuizActivity extends AppCompatActivity {
                 .setMessage("Are you sure you want to submit these answers?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        startQuizz();
+                        startQuiz();
                         Intent intent = new Intent(QuizActivity.this, ResultActivity.class);
-                        intent.putExtra("correct",correct);
-                        intent.putExtra("wrong",wrong);
-                        intent.putExtra("total",total);
+                        intent.putExtra("correct", correct);
+                        intent.putExtra("wrong", wrong);
+                        intent.putExtra("total", total);
                         startActivity(intent);
                     }
                 })

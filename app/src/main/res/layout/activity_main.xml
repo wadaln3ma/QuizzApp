@@ -3,39 +3,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/background"
+    android:orientation="vertical"
     tools:context="com.android.quizzapp.MainActivity">
 
 
-        <TextView
-            android:id="@+id/quiz_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="@dimen/title"
-            android:layout_margin="@dimen/standardmrgn"
-            android:fontFamily="casual"
-            android:text="@string/greetings" />
+    <TextView
+        android:id="@+id/quiz_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/standardmrgn"
+        android:fontFamily="cursive"
+        android:gravity="center"
+        android:text="@string/greetings"
+        android:textSize="@dimen/title" />
 
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/quiz_title"
-            android:scaleType="centerCrop"
-            android:src="@drawable/java_logo" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/quiz_title"
+        android:scaleType="centerCrop"
+        android:src="@drawable/java_logo" />
 
-        <Button
-            android:id="@+id/start_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:gravity="center"
-            android:textSize="@dimen/content"
-            android:layout_marginBottom="@dimen/paddinglft"
-            android:fontFamily="monospace"
-            android:backgroundTint="@color/red"
-            android:text="@string/startQuiz" />
+    <Button
+        android:id="@+id/start_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="@color/red"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:text="@string/startQuiz"
+        android:textColor="@color/white"
+        android:textSize="@dimen/content" />
 
 </RelativeLayout>

@@ -2,6 +2,7 @@
     <string name="app_name">Quizz App</string>
     <string name="greetings">Java Quiz</string>
     <string name="startQuiz">Click Here to Start</string>
+    <string name="restart_quiz">Restart Quiz</string>
     <!-- ============================ -->
     <!-- Question One and its options -->
     <!-- ============================ -->
@@ -17,7 +18,7 @@
     <string name="q2op1">Java</string>
     <string name="q2op2">this</string>
     <string name="q2op3">Object</string>
-    <string name="q2op4">method</string>
+    <string name="q2op4">for</string>
     <!-- ============================ -->
     <!-- Question Three and its options -->
     <!-- ============================ -->
@@ -45,11 +46,9 @@
     <!-- ============================ -->
     <!-- Question Six and its options -->
     <!-- ============================ -->
-    <string name="question6">Question 6:\n A compound statement is :</string>
-    <string name="q6op1">A way of declaring variables</string>
-    <string name="q6op2">A statement involving if and else</string>
-    <string name="q6op3">A collection of one or more statements enclosed in braces</string>
-    <string name="q6op4">A way of setting a value of variable</string>
+    <string name="question6">Question 6:\n String is a Java Primitive Data Type..</string>
+    <string name="q6op1">True</string>
+    <string name="q6op2">False</string>
     <!-- ============================ -->
     <!-- Question Seven and its options -->
     <!-- ============================ -->
@@ -77,13 +76,11 @@
     <!-- ============================ -->
     <!-- Question Ten and its options -->
     <!-- ============================ -->
-    <string name="question10">Question 10:\n An object that is not referred to by any reference variable is called:</string>
-    <string name="q10op1">An invalid object</string>
-    <string name="q10op2">A void object</string>
-    <string name="q10op3">A strange variable</string>
-    <string name="q10op4">An anonymous object</string>
+    <string name="question10">Question 10:\n What is the biggest positive Number that a byte data type can store?</string>
+    <string name="q10_hint">Enter answer here</string>
+    <string name="question_ten_answer">127</string>
     <!-- ============================ -->
-    <!-- Question Ten and its options -->
+    <!-- submit Button -->
     <!-- ============================ -->
     <string name="submitButton">Submit</string>
 </resources>

@@ -1,7 +1,9 @@
 package com.android.quizzapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 
 
@@ -27,4 +29,17 @@ public class ResultActivity extends AppCompatActivity {
         String msg = res.getMessage();
         result.setText(msg);
     }
+
+    public void restartQuiz(View view) {
+        Intent intent = new Intent(ResultActivity.this, QuizActivity.class);
+        intent.putExtra("correct", 0);
+        intent.putExtra("wrong", 0);
+        intent.putExtra("total", 0);
+        startActivity(intent);
+    }
+    @Override
+    public void onBackPressed(){
+        //do nothing
+    }
+
 }
