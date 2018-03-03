@@ -14,8 +14,14 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class QuizActivity extends AppCompatActivity {
+
+    // I would have the access modifier private for blank.
     public int total, wrong, correct, counter = 0;
+
+    // don't use snake_case for variable names, snake_case is for XML
     public RadioGroup radio_Q1, radio_Q3, radio_Q4, radio_Q5, radio_Q7, radio_Q8, radio_Q9;
+
+
     CheckBox checkBoxOne, checkBoxTwo, checkBoxThree, checkBoxFour, checkBoxFive, checkBoxSix;
     EditText editText;
     boolean checkOptionOne, checkOptionTwo, checkOptionThree, checkOptionFour, checkOptionFive, checkOptionSix;
@@ -25,8 +31,10 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        checkBoxOne = (CheckBox) findViewById(R.id.q2op1);
-        checkBoxTwo = (CheckBox) findViewById(R.id.q2op2);
+        // the typecasting is is redundant, that's why the words are grayed out with
+        // squiggly lines under them.  I cleaned up the first two as an example.
+        checkBoxOne = findViewById(R.id.q2op1);
+        checkBoxTwo = findViewById(R.id.q2op2);
         checkBoxThree = (CheckBox) findViewById(R.id.q2op3);
         checkBoxFour = (CheckBox) findViewById(R.id.q2op4);
         checkBoxFive = (CheckBox) findViewById(R.id.q6op1);
@@ -40,6 +48,7 @@ public class QuizActivity extends AppCompatActivity {
         radio_Q9 = (RadioGroup) findViewById(R.id.question_nine);
         editText = (EditText) findViewById(R.id.question_ten_edit);
 
+        // After you deal with deallocating activities you won't need this
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             correct = extras.getInt("correct");
@@ -48,6 +57,14 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
+    // You should really break up the blow in multiple methods vs one "super" method.
+    // Think: loadQuestions, checkAnswers, etc.
+    // This below section needs a lot of documentation.
+    // Also you need to think through how you want to do error checking.  That may influence
+    // How you actually want to check your answers.
+    // I'd recommend trying to build out 3 robust methods to check each question type
+    // Take a crack at cleaning the below and adding in error checking and then we can talk about this
+    // section more.
     void startQuiz() {
         Questions q1 = new Questions(getString(R.string.question1), getString(R.string.q1op1), getString(R.string.q1op2), getString(R.string.q1op3), getString(R.string.q1op4), new Answer(getString(R.string.q1op2)));
         Questions q3 = new Questions(getString(R.string.question3), getString(R.string.q3op1), getString(R.string.q3op2), getString(R.string.q3op3), getString(R.string.q3op4), new Answer(getString(R.string.q3op3)));
@@ -62,6 +79,9 @@ public class QuizActivity extends AppCompatActivity {
         RadioGroup radioGroup[] = {radio_Q1, radio_Q3, radio_Q4, radio_Q5, radio_Q7, radio_Q8, radio_Q9};
 
         String answers[] = new String[7];
+
+        // if you're going to use counter++ at the bottom, you're better off just using a normal
+        // for loop.
         for (RadioGroup r : radioGroup) {
             int selectedId = r.getCheckedRadioButtonId();
             RadioButton selectedRadioButton = (RadioButton) findViewById(selectedId);
@@ -81,6 +101,9 @@ public class QuizActivity extends AppCompatActivity {
             counter++;
         }
 
+
+        // Checkbox Answer Verification
+        // Can you think of a better way to check that isn't hard coded?
         checkOptionOne = checkBoxOne.isChecked();
         checkOptionTwo = checkBoxTwo.isChecked();
         checkOptionThree = checkBoxThree.isChecked();
@@ -93,6 +116,9 @@ public class QuizActivity extends AppCompatActivity {
         }
         total++;
 
+
+        // True False checking
+        // This should be a radio group not checkbox :)
         checkOptionFive = checkBoxFive.isChecked();
         checkOptionSix = checkBoxSix.isChecked();
 
@@ -102,6 +128,11 @@ public class QuizActivity extends AppCompatActivity {
             wrong++;
         }
         total++;
+
+        //EditView check
+        // Since your solution is a number, why not use numeric keyboard
+        // I updated your XML for that.
+        // If this was a string, you'd want more robust checking (ask me if you don't understand what I mean)
 
         String questionTenAnswer = editText.getText().toString();
 
@@ -143,6 +174,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private int backButtonCount = 0;
+
     @Override
     public void onBackPressed(){
         if(backButtonCount >= 1)
