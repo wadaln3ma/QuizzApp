@@ -5,48 +5,48 @@ public class Results implements IResult {
     public String message;
 
     public void showResult(int correct, int wrong, int total) {
-        int grade = (correct * 100) / total;
-        if (grade == 100) {
+        int score = (correct * 100) / total;
+        if (score == 100) {
             message = "Total Number Of Question: " + total
                     + "\nCorrect Answers: " + correct
                     + "\nWrong Answers: " + wrong
-                    + "\nYour Grade is: %" + grade
+                    + "\nYour Score is: %" + score
                     + "\nCongratulations You Aced the Quiz";
-        } else if (grade >= 90) {
+        } else if (score >= 90) {
             message = "Total Number Of Question: " + total
                     + "\nCorrect Answers: " + correct
                     + "\nWrong Answers: " + wrong
-                    + "\nYour Grade is: %" + grade
+                    + "\nYour Score is: %" + score
                     + "\nExcellent Work!";
-        } else if (grade >= 80) {
+        } else if (score >= 80) {
             message = "Total Number Of Question: " + total
                     + "\nCorrect Answers: " + correct
                     + "\nWrong Answers: " + wrong
-                    + "\nYour Grade is: %" + grade
+                    + "\nYour Score is: %" + score
                     + "\nVery Good Work!";
-        } else if (grade >= 70) {
+        } else if (score >= 70) {
             message = "Total Number Of Question: " + total
                     + "\nCorrect Answers: " + correct
                     + "\nWrong Answers: " + wrong
-                    + "\nYour Grade is: %" + grade
+                    + "\nYour Score is: %" + score
                     + "\nGood Work!";
-        } else if (grade >= 50) {
+        } else if (score >= 50) {
             message = "Total Number Of Question: " + total
                     + "\nCorrect Answers: " + correct
                     + "\nWrong Answers: " + wrong
-                    + "\nYour Grade is: %" + grade
-                    + "\nYou've Just barely passed!";
-        } else if (grade < 50 && !(grade == 0)) {
+                    + "\nYour Score is: %" + score
+                    + "\nYou've passed!";
+        } else if (score < 50 && !(score == 0)) {
             message = "Total Number Of Question: " + total
                     + "\nCorrect Answers: " + correct
                     + "\nWrong Answers: " + wrong
-                    + "\nYour Grade is: %" + grade
+                    + "\nYour Score is: %" + score
                     + "\nYour Knowledge about Java is very poor you should work on that!";
-        } else if (grade == 0) {
+        } else if (score == 0) {
             message = "Total Number Of Question: " + total
                     + "\nCorrect Answers: " + correct
                     + "\nWrong Answers: " + wrong
-                    + "\nYour Grade is: %" + grade
+                    + "\nYour Grade is: %" + score
                     + "\noops! .. You Don't know anything about Java you should take a Udacity course about it";
         }
     }
