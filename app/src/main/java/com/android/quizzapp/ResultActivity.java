@@ -34,9 +34,7 @@ public class ResultActivity extends AppCompatActivity {
     // Also when you refactor this, you won't need to use any putExtra's
     public void restartQuiz(View view) {
         Intent intent = new Intent(ResultActivity.this, QuizActivity.class);
-        intent.putExtra("correct", 0);
-        intent.putExtra("wrong", 0);
-        intent.putExtra("total", 0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
