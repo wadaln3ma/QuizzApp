@@ -29,20 +29,20 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        checkBoxOne = (CheckBox) findViewById(R.id.q2op1);
-        checkBoxTwo = (CheckBox) findViewById(R.id.q2op2);
-        checkBoxThree = (CheckBox) findViewById(R.id.q2op3);
-        checkBoxFour = (CheckBox) findViewById(R.id.q2op4);
-        radioGroup[0] = (RadioGroup) findViewById(R.id.question_one);
-        radioGroup[1] = (RadioGroup) findViewById(R.id.question_three);
-        radioGroup[2] = (RadioGroup) findViewById(R.id.question_four);
-        radioGroup[3] = (RadioGroup) findViewById(R.id.question_five);
-        radioGroup[4] = (RadioGroup) findViewById(R.id.question_six);
-        radioGroup[5] = (RadioGroup) findViewById(R.id.question_seven);
-        radioGroup[6] = (RadioGroup) findViewById(R.id.question_eight);
-        radioGroup[7] = (RadioGroup) findViewById(R.id.question_nine);
-        editText = (EditText) findViewById(R.id.question_ten_edit);
-        submit = (Button) findViewById(R.id.submit_button);
+        checkBoxOne = findViewById(R.id.q2op1);
+        checkBoxTwo = findViewById(R.id.q2op2);
+        checkBoxThree = findViewById(R.id.q2op3);
+        checkBoxFour = findViewById(R.id.q2op4);
+        radioGroup[0] = fiewById(R.id.question_one);
+        radioGroup[1] = findViewById(R.id.question_three);
+        radioGroup[2] = findViewById(R.id.question_four);
+        radioGroup[3] = findViewById(R.id.question_five);
+        radioGroup[4] = findViewById(R.id.quesftion_six);
+        radioGroup[5] = findViewById(R.id.question_seven);
+        radioGroup[6] = findViewById(R.id.question_eight);
+        radioGroup[7] = findViewById(R.id.question_nine);
+        editText = findViewById(R.id.question_ten_edit);
+        submit = findViewById(R.id.submit_button);
 
         question[0] = new Questions(getString(R.string.question1), getString(R.string.q1op1), getString(R.string.q1op2), getString(R.string.q1op3), getString(R.string.q1op4), new Answer(getString(R.string.q1op2)));
         question[1] = new Questions(getString(R.string.question3), getString(R.string.q3op1), getString(R.string.q3op2), getString(R.string.q3op3), getString(R.string.q3op4), new Answer(getString(R.string.q3op3)));
@@ -55,7 +55,16 @@ public class QuizActivity extends AppCompatActivity {
 
     }
 
-    void startQuiz() {
+
+    // You should really break up the blow in multiple methods vs one "super" method.
+    // Think: loadQuestions, checkAnswers, etc.
+    // This below section needs a lot of documentation.
+    // Also you need to think through how you want to do error checking.  That may influence
+    // How you actually want to check your answers.
+    // I'd recommend trying to build out 3 robust methods to check each question type
+    // Take a crack at cleaning the below and adding in error checking and then we can talk about this
+    // section more.
+   void startQuiz() {
 
         String answers[] = new String[8];
         for (RadioGroup r : radioGroup) {
@@ -148,4 +157,3 @@ public class QuizActivity extends AppCompatActivity {
     }
 
 }
-

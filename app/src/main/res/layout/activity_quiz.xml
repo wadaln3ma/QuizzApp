@@ -377,6 +377,7 @@
             android:layout_marginRight="@dimen/standardmrgn"
             android:inputType="number"
             android:backgroundTint="@color/red"
+            android:inputType="number"
             android:hint="@string/q10_hint" />
 
         <Button

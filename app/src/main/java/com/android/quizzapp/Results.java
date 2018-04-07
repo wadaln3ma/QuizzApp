@@ -2,8 +2,9 @@ package com.android.quizzapp;
 
 
 public class Results implements IResult {
-    public String message;
+    private String message;
 
+    // Using a switch would be a better choice.
     public void showResult(int correct, int wrong, int total) {
         int score = (correct * 100) / total;
         if (score == 100) {

@@ -16,7 +16,7 @@ public class ResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
-        result = (TextView) findViewById(R.id.result);
+        result = findViewById(R.id.result);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -30,11 +30,15 @@ public class ResultActivity extends AppCompatActivity {
         result.setText(msg);
     }
 
+    // you're stacking on the previous views.  You should be releasing not adding more.
+    // Also when you refactor this, you won't need to use any putExtra's
     public void restartQuiz(View view) {
         Intent intent = new Intent(ResultActivity.this, QuizActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+
+    // If you're not going to over ride this, you're better commenting this out.
     @Override
     public void onBackPressed(){
         //do nothing

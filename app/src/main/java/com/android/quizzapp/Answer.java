@@ -1,9 +1,14 @@
 package com.android.quizzapp;
 
+/**
+ * Needs more documentation and commenting
+ */
 
 public class Answer {
-    String answer;
+    // this should be private
+    private String answer;
 
+    // constructor
     public Answer(String answer) {
         this.answer = answer;
     }
